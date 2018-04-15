@@ -17,9 +17,13 @@ The major use cases of the system are:
 • Requester rates the service provided by a responder
  
 Example Usage:
+
 A requester creates a post:
+
 Post Title: “Need Tire Changed”
+
 Post Location: [Insert Location]
+
 Post Description: “I need my car tire changed and will pay 30 mins to someone who helps with this”
 Post Amount: 30 minutes
 System:

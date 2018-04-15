@@ -1,6 +1,6 @@
 # Time-Banking
 
-Time Bank App
+Time Bank AppHERE
 
 Introduction:
 This is a mobile based application where people on this platform can trade hours as local currency. This system provides a means for people to request different services and provide diverse services to people on this platform. When a user needs a request, the request is posted which is broadcasted and made available to all users of the application. The request posted includes how much time the requester is willing to trade for the service.

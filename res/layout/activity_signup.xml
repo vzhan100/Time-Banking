@@ -39,7 +39,7 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />

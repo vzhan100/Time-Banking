@@ -5,7 +5,7 @@ Author: Joseph Urie
 Date: April 11th, 2018
 */
 
-package com.cis454.joe.myapplication;
+package com.timebanking.firebase;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -16,13 +16,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        View btnAddJob = findViewById(R.id.btn_addjob);
+        btnAddJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AddJobActivity.class));
+            }
+        });
+
+
+
     }
 
-    public void gotoDesc(View view) {
-        // Do something in response to button
-        Intent intent = new Intent(this, DescriptionActivity.class);
-        startActivity(intent);
-    }
+
+
+
 
 
 }

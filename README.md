@@ -15,3 +15,7 @@ The major use cases of the system are:
 • Responder browses through all available services request
 • Responder views approximate time to a service location
 • Requester rates the service provided by a responder
+
+
+
+Note to Vincent: Update Signup.java, User.java, AddJobActivity.xml, Job.java, AddJob.java

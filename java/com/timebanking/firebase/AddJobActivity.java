@@ -25,17 +25,10 @@ public class AddJobActivity extends AppCompatActivity implements AdapterView.OnI
         //Integer[] minutes = new Integer[]{30,60,90,120,150,180,210,240};
 
         Spinner paySpinner = (Spinner) findViewById(R.id.spinner1);
-        String[] array = getResources().getStringArray(R.array.pay_amounts);
-
-        Integer [] minutes = new Integer[array.length];
-        for(int i = 0; i < array.length; i++) {
-            minutes[i] = Integer.parseInt(array[i]);
-        }
-
-        ArrayAdapter<Integer> myAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_list_item_1, minutes);
+        paySpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddJobActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.pay_amounts));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         paySpinner.setAdapter(myAdapter);
-        Integer inputMinutes = (Integer)paySpinner.getSelectedItem();
 
         View btnSubmit = findViewById(R.id.btn_submit);
 
@@ -53,8 +46,8 @@ public class AddJobActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String selected = (String) adapterView.getSelectedItem().toString();
-        int minutes = Integer.parseInt(selected);
+        Object something = adapterView.getItemAtPosition(i);
+        int inputMinutes = (int) something;
     }
 
     @Override

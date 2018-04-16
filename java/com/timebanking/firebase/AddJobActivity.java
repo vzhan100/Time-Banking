@@ -22,12 +22,20 @@ public class AddJobActivity extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_job);
 
-        Integer[] minutes = new Integer[]{30,60,90,120,150,180,210,240};
+        //Integer[] minutes = new Integer[]{30,60,90,120,150,180,210,240};
 
         Spinner paySpinner = (Spinner) findViewById(R.id.spinner1);
+        String[] array = getResources().getStringArray(R.array.pay_amounts);
+
+        Integer [] minutes = new Integer[array.length];
+        for(int i = 0; i < array.length; i++) {
+            minutes[i] = Integer.parseInt(array[i]);
+        }
+
         ArrayAdapter<Integer> myAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_list_item_1, minutes);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         paySpinner.setAdapter(myAdapter);
+        Integer inputMinutes = (Integer)paySpinner.getSelectedItem();
 
         View btnSubmit = findViewById(R.id.btn_submit);
 
@@ -44,16 +52,13 @@ public class AddJobActivity extends AppCompatActivity implements AdapterView.OnI
 
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String selected = (String) adapterView.getSelectedItem().toString();
+        int minutes = Integer.parseInt(selected);
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void addJob (View view){
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

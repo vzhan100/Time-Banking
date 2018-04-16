@@ -22,18 +22,29 @@ public class AddJobActivity extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_job);
 
+        Integer[] minutes = new Integer[]{30,60,90,120,150,180,210,240};
+
         Spinner paySpinner = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(AddJobActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.pay_amounts));
+        ArrayAdapter<Integer> myAdapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_list_item_1, minutes);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         paySpinner.setAdapter(myAdapter);
+
+        View btnSubmit = findViewById(R.id.btn_submit);
+
+        //String[] jobs = {"Job 1", "Job 2", "Job 3"};
+
+        //Code to save job to DB and display on homepage
+        if (btnSubmit.isPressed()){
+            //Save to Firebase
+            //Go to Main Activity and post Job
+
+        }
 
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selected = parent.getItemAtPosition(position).toString();
 
     }
 

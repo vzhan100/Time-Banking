@@ -21,14 +21,9 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".AddJobActivity"/>
         <activity android:name=".DescriptionActivity"/>
-        <activity android:name=".JobActivity">
-             android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+        <activity android:name=".JobActivity"/>
         <activity android:name=".DisplayJob">
-                 android:parentActivityName=".MainActivity">
+                 android:parentActivityName=".JobActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".JobActivity" />

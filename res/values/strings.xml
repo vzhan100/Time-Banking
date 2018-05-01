@@ -31,15 +31,13 @@
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="notification">Notification</string>
     <string name="jobs">Jobs</string>
     <string name="contact">Contact</string>
     <string name="accept_job">Accept Job</string>
-    <string name="my_jobs">My Jobs</string>
-    <string name="select">Select</string>
-
     <string name="job1">
         Cletus Andoh
     \nI need help with my car
@@ -58,10 +56,13 @@
     \nPay: 30 minutes</string>
 
     <string name="intro1">
-        Cletus Andoh</string>
+        Cletus Andoh
+    \nSyracuse, NY
+    \nTime Left: 5 hours</string>
 
-    <string name="desc1">My car has been really dirty for the last couple of weeks. I havent had time
-    to get it to a car wash so if anyone is willing to wash my car, I will pay 30 minutes. Located in Syracuse NY. Thanks</string>
+    <string name="desc1">I have been having some troubles my car. It has constantly been breaking
+    down and I thin k it is because of the engine. If any mechanics or anyone with car
+    experience can help, than would be great. Willing to pay 30 minutes.</string>
     <string name="job_submit">Submit</string>
 
     <string-array name="pay_amounts">
@@ -74,4 +75,7 @@
         <item>210</item>
         <item>240</item>
     </string-array>
+
+
+    <string name="twitterUsername">\@super123</string>
 </resources>

@@ -2,6 +2,7 @@
 CIS 454
 Time Banker App
 Author: Joseph Urie
+Group #18
 Date: April 29th, 2018
 */
 
@@ -17,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,30 +27,33 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class JobActivity extends AppCompatActivity {
     //Globals
     ListView listView;
     public static ArrayList<Job> jobList;
-    ArrayAdapter<Job> adapter;
+    ArrayAdapter adapter;
     public static String jobID;
     FirebaseDatabase database;
-    DatabaseReference dataRef;
+    DatabaseReference jobRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job);
 
+        //Firebase Authentication - Verify who is logged in
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String userId = firebaseUser.getUid();
+
         //List View
         listView = findViewById(R.id.listView);
 
         //Database
         database = FirebaseDatabase.getInstance();
-        dataRef = database.getReference("jobs");
-
-        addValueEventListener(dataRef);
+        jobRef = database.getReference("users").child(userId).child("accepted_jobs");
+        addValueEventListener(jobRef);
 
         //When you click the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,9 +73,8 @@ public class JobActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 jobList = new ArrayList<>();
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
-                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
-                while (iterator.hasNext()) {
-                    Job value = iterator.next().getValue(Job.class);
+                for (DataSnapshot aSnapshotIterator : snapshotIterator) {
+                    Job value = aSnapshotIterator.getValue(Job.class);
                     jobList.add(value);
                 }
                 ArrayAdapter adapter = setupAdapter(jobList);
@@ -83,15 +88,19 @@ public class JobActivity extends AppCompatActivity {
     }
 
     private ArrayAdapter setupAdapter(final ArrayList<Job> jobList) {
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, jobList) {
+        adapter = new ArrayAdapter<Job>(this, android.R.layout.simple_list_item_2, android.R.id.text1, jobList) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text1 = view.findViewById(android.R.id.text1);
                 TextView text2 = view.findViewById(android.R.id.text2);
-                text1.setText(jobList.get(position).getTitle()+"\nPosted by: "+jobList.get(position).getUserId());
+                String displayText1 = (jobList.get(position).getTitle()); //+"\nPosted by: "+jobList.get(position).getUserId()
+                text1.setText(displayText1);
                 text1.setTextSize((float) 18.0); //Make Job Title bigger
-                text2.setText(jobList.get(position).getDesc()+"\nPay: "+jobList.get(position).getPay());
+                String displayText2 = (jobList.get(position).getDesc()+
+                                        "\nPay: "+jobList.get(position).getPay()+
+                                        "\n"+jobList.get(position).getAddress());
+                text2.setText(displayText2);
                 text2.setTextSize((float) 12.0);
                 return view;
             }
@@ -105,13 +114,13 @@ public class JobActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
     //Sends you to your profile page when clicked
     public void sendProfile(View view) {
-        Intent intent = new Intent(this, //class here//);
+        Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
     }
 
+    /*
     //View notifications when clicked
     public void sendNotifications(View view) {
         Intent intent = new Intent(this, //class here//);

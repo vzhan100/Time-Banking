@@ -33,15 +33,20 @@ public class profile_Main extends AppCompatActivity {
     RatingBar rb;
     Button submitbtn;
     ListView tv_name;
+    ListView tv_min;
+    ListView tv_amin;
     EditText tvaddress;
+
     private DatabaseReference databaseReference;
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth mAuth;
     long minutes, aminutes;
     String userEmail, userId, userName;
-    ArrayList<String> minutesList  = new ArrayList<>();
+
+
+    ArrayList<Long> minutesList  = new ArrayList<>();
     ArrayList<String> nameList  = new ArrayList<>();
-    ArrayList<String> aminutesList  = new ArrayList<>();
+    ArrayList<Long> aminutesList  = new ArrayList<>();
 
     // Editing values into database
 
@@ -51,24 +56,17 @@ public class profile_Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-//getting views
-        tv_name = (ListView) findViewById(R.id.testlistview);
-
-
 
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
         userId = user.getUid();
         userEmail = user.getEmail();
-        //getting the reference of artists node
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         addValueEventListener(databaseReference);
 
 
 
-
-        //list to store artists
-
+        //Rating System
         rb = (RatingBar) findViewById(R.id.ratingBar);
         value = (TextView) findViewById(R.id.value);
 
@@ -82,6 +80,8 @@ public class profile_Main extends AppCompatActivity {
             }
         });
     }
+
+    // References firebase and grab the data stored inside
     private void addValueEventListener(final DatabaseReference userReference) {
         /*add ValueEventListener to update data in realtime*/
         userReference.addValueEventListener(new ValueEventListener() {
@@ -111,9 +111,26 @@ public class profile_Main extends AppCompatActivity {
                     }
                     //These print statements are for testing and debugging purposes
                 }
+                // READS THE NAME AND RETRUNS IT IN PROFILE
+                
+                //add it from database
                 nameList.add(userName);
+                // rename name it 
                 ArrayAdapter nameAdapter = new ArrayAdapter<String>(profile_Main.this, android.R.layout.simple_list_item_1, nameList);
+                //set it as the new adapter
                 tv_name.setAdapter(nameAdapter);
+
+                //Returns the minutes and returns it in profile
+                minutesList.add(minutes);
+                ArrayAdapter minutesAdapter = new ArrayAdapter<Long>(profile_Main.this, android.R.layout.simple_list_item_1, minutesList);
+                tv_min.setAdapter(minutesAdapter);
+
+                //returns the aminutes
+                aminutesList.add(minutes);
+                ArrayAdapter aminutesAdapter = new ArrayAdapter<Long>(profile_Main.this, android.R.layout.simple_list_item_1, aminutesList);
+                tv_amin.setAdapter(aminutesAdapter);
+
+                //prints it 
                 System.out.println("Minutes :" + minutes);
                 System.out.println("Available Minutes :" + aminutes);
                 System.out.println("Name: " + userName);
@@ -129,7 +146,7 @@ public class profile_Main extends AppCompatActivity {
         });
     }
 
-
+    // click on submit save information in database and the profile 
     public void onButtonClickListener() {
 
         rb = (RatingBar) findViewById(R.id.ratingBar);

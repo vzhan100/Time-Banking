@@ -18,4 +18,4 @@ The major use cases of the system are:
 
 
 
-Note to Vincent: Update Signup.java, User.java, AddJobActivity.xml, Job.java, AddJob.java
+Contact Vincent for full project.
